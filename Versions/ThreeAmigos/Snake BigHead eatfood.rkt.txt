@@ -1,0 +1,75 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Snake BigHead eatfood|) (read-case-sensitive #t) (teachpacks ((lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #t #t none #f ((lib "universe.rkt" "teachpack" "2htdp")))))
+(define (moveposn-right myPosn)
+   (make-posn (+ (posn-x myPosn) 1)
+                 (posn-y myPosn)))
+ 
+ (define (moveposn-left myPosn)
+   (make-posn (- (posn-x myPosn) 1)
+                 (posn-y myPosn)))
+ 
+ (define (moveposn-up myPosn)
+   (make-posn (posn-x myPosn)
+              (- (posn-y myPosn) 1)))
+ 
+ (define (moveposn-down myPosn)
+   (make-posn (posn-x myPosn)
+              (+ (posn-y myPosn) 1)))
+ 
+ (define (EatFood? myS myFM)
+   (if (empty? myFM) false
+       (if false
+           (or (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+               (EatFood? myS (rest myFM)))
+               (if (< (SNAKE_HEAD-TYPE myS) 5)
+                   (cond [(= 1 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM))
+                          (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))]
+                          
+                      
+                     [(= 2 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          
+                      ]
+                     [(= 3 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          
+                      ]
+                     [(= 4 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          
+                      ]))
+               (if (> (SNAKE_HEAD-TYPE myS) 4)
+                   (cond [(= 5 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (moveposn-left (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (moveposn-right (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          )]
+                      
+                     [(= 6 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (moveposn-up (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (moveposn-down (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          )
+                      ]
+                     [(= 7 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (moveposn-left (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (moveposn-right (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          )
+                      ]
+                     [(= 8 (SNAKE_HEAD-TYPE (SNAKE-HEAD myS)))
+                      (or (equal? (moveposn-up (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (SNAKE_HEAD-LOC (SNAKE-HEAD myS)) (FOOD_BIT-LOC (first myFM)))
+                          (equal? (moveposn-down (SNAKE_HEAD-LOC (SNAKE-HEAD myS))) (FOOD_BIT-LOC (first myFM)))
+                          (EatFood? myS (rest myFM))
+                          )
+                      ]))))) 
